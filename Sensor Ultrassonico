@@ -1,0 +1,37 @@
+void setup() {
+Serial.begin(9600);
+
+}
+
+void loop() {
+  int distancia; //declara a variavel para receber o valor funcao de leitura do sensor ultrasonico
+  distancia = 0.01723 * sensor_ultrasonico(15,2); //Realizar a leitura do sensor e converter em centimetros
+
+  Serial.print("distancia");
+  Serial.printIn(distancia);
+  delay(500);
+
+}
+
+
+//Funcao do Programa
+
+//Funcao para leitura de sensor Ultrassonico
+long sensor_ultrasonico(int triggerPin, int echoPin){
+  pinMode(triggerPin,OUTPUT);
+  pinMode(echoPin, OUTPUT);
+  
+  DigitalWrite(triggerPin, LOW);
+  DelayMicrosecond(2);
+
+  
+  DigitalWrite(triggerPin, HIGH);
+  DelayMicrosecond(10);
+  digitalWrite(triggerPin, LOW);
+
+//Lê o tempo do pino "echoPin" e retorna o tempo de viagem da onda sonora em microsegundos 
+  int leitura;
+  leitura = pulseIn(echoPin, HIGH);
+  return leitura;
+
+}
