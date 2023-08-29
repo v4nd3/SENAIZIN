@@ -19,7 +19,7 @@ void loop() {
 //Funcao para leitura de sensor Ultrassonico
 long sensor_ultrasonico(int triggerPin, int echoPin){
   pinMode(triggerPin,OUTPUT);
-  pinMode(echoPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   
   DigitalWrite(triggerPin, LOW);
   DelayMicrosecond(2);
