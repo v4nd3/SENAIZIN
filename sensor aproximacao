@@ -1,0 +1,74 @@
+#include <LiquidCrystal_I2C.h>
+//INCLUSÃO DE BIBLIOTECAS
+#include <Wire.h>
+#include <Liquidcrystal_I2C.h>
+
+// DEFINIÇÕES
+#define endereco 0x27 // Endereços comuns: 0x27, 0x3F
+#define colunas 16
+#define linhas 2
+// INSTANCIANDO OBJETOS
+LiquidCrystal_I2C lcd(endereco, colunas, linhas);
+
+void setup() {
+  Serial.begin(9600);
+  
+  lcd.init();
+  lcd.backlight();
+
+  lcd.setCursor(0,0);
+  lcd.print(" SENAI VIDEIRA");
+  lcd.setCursor(0,1);
+  lcd.print("INICIANDO...");
+  delay(2500);
+  lcd.clear();
+   }
+
+   void loop() {
+  int distancia;
+  Serial.print("DISTANCIA: ");
+  Serial.println(distancia);
+  
+
+  lcd.setCursor(3,0);
+  lcd.print(" DISTANCIA ");
+  lcd.setCursor(4,1);
+  lcd.print("distancia");
+  lcd.setCursor(8,1);
+  lcd.print("cm");
+  delay(500);
+  lcd.clear();
+   }
+
+//v = 0,034
+void setup() {
+Serial.begin(9600);
+
+}
+
+void loop() {
+  int distancia;//Declra a variavel para receber o valor função de leitura do sensor ultrassonico
+  distancia = 0.01723 * sensor_ultrassonico (2,15);//Realizar a leitura do sensor e converter em centimetros
+
+  Serial.print("Distância");
+  Serial.println(distancia);
+  delay(500);
+  }
+
+//fUNÇÃO PARA LEITURA DE SENSOR ULTRASSONICO
+  long sensor_ultrassonico (int triggerPin, int echoPin){
+  pinMode(triggerPin,OUTPUT);
+  pinMode(echoPin, INPUT);
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+
+   digitalWrite(triggerPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(echoPin, LOW);
+
+   // lê o tempo do Pino "EchoPin" e retorna o tempo de viagem da onda sonora em microsegundos
+   int leitura;
+   leitura = pulseIn(echoPin, HIGH);
+   return leitura;
+   }
+
