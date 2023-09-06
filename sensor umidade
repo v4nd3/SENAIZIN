@@ -1,0 +1,50 @@
+DEFINIÇÕES
+#define endereco 0x27
+#define colunas 16
+#define linhas 2
+// INSTANCIANDO OBJETOS
+LiquidCrystal_I2C lcd(endereco, colunas, linhas);
+
+void setup(){
+  Serial.begin(9600);
+
+  lcd.init(); //Para iniciar função
+  dht.begin();
+
+  lcd.backlight();//Quando n tem nada na frente desliga a tela
+  lcd.setCursor(0,0);
+  lcd.print(" SENAI VIDEIRA ");
+  lcd.setCursor(0,1);
+  lcd.print("INICIANDO...");
+  delay(2500);
+  lcd.clear();  
+}
+void loop(){
+  int distancia;
+
+  Serial.print("DISTANCIA:  ");
+  Serial.println(distancia); //INSERE A VARIAVEL DISTANCIA PARA JOGAR O VALOR NA LINHA ACIMA E QUEBRA A LINHA
+
+  lcd.setCursor(3,0);
+  lcd.print(" DISTANCIA ");
+  lcd.setCursor(4,1);
+  lcd.print(distancia);
+  lcd.setCursor(8,1);
+  lcd.print("cm");
+  delay(500);
+  lcd.clear();
+//LEITURA DA UMIDADE
+  float u = dht.readHumidity();
+//LEITURA DA TEMPERATURA
+  float t = dht.readTemperature();
+//REALIZA O PRINT NO MONITOR SERIAL
+  Serial.print("Temperatura:  ");
+  Serial.println(t);
+  Serial.print("Umidade");
+  Serial.println(u);
+  delay(500);
+  }
+
+  //  distancia = 0.01723 * sensor_ultrassonico(15,2);
+
+
